@@ -1,0 +1,52 @@
+RSSReader
+=========
+
+It is a simple to use RSS feed parser for Android with minimal features.
+It uses SAX.
+
+It can process RSS feed of following structure :
+
+-----------------------
+
+<rss version="2.0">
+<channel>
+<item>
+	<title>		</title>
+	<author>	</author>
+	<category>	</category>
+	<link>		</link>
+	<description>	</description>
+	<pubDate>	</pubDate>
+</item>
+<item>
+	.
+	.	
+	.
+
+</item>
+</channel>
+</rss>
+
+-----------------------
+
+Sample Usage
+-----------------------
+
+RSSFeed feed = RSSReader.getFeed("URL_OF_RSS_FEED");
+
+for(RSSItem i : feed.getAllItems()) {
+	i.getTitle();
+	i.getAuthor();
+	i.getCategory();
+	i.getLink();
+	i.getDescription();
+	i.getPubDate();
+}
+
+
+---------------------------
+How to use it in your app?
+---------------------------
+
+1. Download RSSReader.jar
+2. Import the jar in your Eclipse project.
