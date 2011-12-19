@@ -12,6 +12,7 @@ public class RSSHandler extends DefaultHandler {
 	boolean bFoundChannel = false;
 	int depth = 0;
 	int currentstate = 0;
+	StringBuffer str;
 	
 	/*
 	* Constructor
@@ -40,6 +41,7 @@ public class RSSHandler extends DefaultHandler {
 	
 	public void startElement(String namespaceURI, String localName,String qName, Attributes atts) throws SAXException {
 		depth++;
+		str = new StringBuffer("");
 		
 		if (localName.equals("channel")) {
 			currentstate = 0;
@@ -96,39 +98,40 @@ public class RSSHandler extends DefaultHandler {
 			feed.addItem(item);
 			return;
 		}
+		else {
+			switch (currentstate)
+			{
+				case RSSConstants.ITEM_TITLE:
+					item.setTitle(str.toString());
+					currentstate = 0;
+					break;
+				case RSSConstants.ITEM_AUTHOR:
+					item.setAuthor(str.toString());
+					currentstate = 0;
+					break;
+				case RSSConstants.ITEM_CATEGORY:
+					item.setCategory(str.toString());
+					currentstate = 0;
+					break;
+				case RSSConstants.ITEM_LINK:
+					item.setLink(str.toString());
+					currentstate = 0;
+					break;
+				case RSSConstants.ITEM_DESCRIPTION:
+					item.setDescription(str.toString());
+					currentstate = 0;
+					break;
+				case RSSConstants.ITEM_PUBDATE:
+					item.setPubDate(str.toString());
+					currentstate = 0;
+					break;
+				default:
+					return;
+			}
+		}
 	}
 	
 	public void characters(char ch[], int start, int length) {
-		String theString = new String(ch,start,length);
-		
-		switch (currentstate)
-		{
-			case RSSConstants.ITEM_TITLE:
-				item.setTitle(theString);
-				currentstate = 0;
-				break;
-			case RSSConstants.ITEM_AUTHOR:
-				item.setAuthor(theString);
-				currentstate = 0;
-				break;
-			case RSSConstants.ITEM_CATEGORY:
-				item.setCategory(theString);
-				currentstate = 0;
-				break;
-			case RSSConstants.ITEM_LINK:
-				item.setLink(theString);
-				currentstate = 0;
-				break;
-			case RSSConstants.ITEM_DESCRIPTION:
-				item.setDescription(theString);
-				currentstate = 0;
-				break;
-			case RSSConstants.ITEM_PUBDATE:
-				item.setPubDate(theString);
-				currentstate = 0;
-				break;
-			default:
-				return;
-		}
+		str.append(new String(ch,start,length));
 	}
 }
