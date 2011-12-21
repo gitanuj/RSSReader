@@ -9,4 +9,6 @@ public class RSSConstants {
 	public static final int ITEM_LINK = 4;
 	public static final int ITEM_DESCRIPTION = 5;
 	public static final int ITEM_PUBDATE = 6;
+	
+	public static final String ampersand = "&amp;";
 }

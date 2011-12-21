@@ -4,6 +4,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import android.text.Html;
+
 public class RSSHandler extends DefaultHandler {
 	
 	RSSFeed feed;
@@ -99,30 +101,31 @@ public class RSSHandler extends DefaultHandler {
 			return;
 		}
 		else {
+			String result = Html.fromHtml(str.toString().trim()).toString();
 			switch (currentstate)
 			{
 				case RSSConstants.ITEM_TITLE:
-					item.setTitle(str.toString().trim());
+					item.setTitle(result);
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_AUTHOR:
-					item.setAuthor(str.toString().trim());
+					item.setAuthor(result);
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_CATEGORY:
-					item.setCategory(str.toString().trim());
+					item.setCategory(result);
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_LINK:
-					item.setLink(str.toString().trim());
+					item.setLink(result);
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_DESCRIPTION:
-					item.setDescription(str.toString().trim());
+					item.setDescription(result);
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_PUBDATE:
-					item.setPubDate(str.toString().trim());
+					item.setPubDate(result);
 					currentstate = 0;
 					break;
 				default:
