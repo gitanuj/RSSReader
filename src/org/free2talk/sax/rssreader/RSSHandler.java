@@ -102,27 +102,27 @@ public class RSSHandler extends DefaultHandler {
 			switch (currentstate)
 			{
 				case RSSConstants.ITEM_TITLE:
-					item.setTitle(str.toString());
+					item.setTitle(str.toString().trim());
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_AUTHOR:
-					item.setAuthor(str.toString());
+					item.setAuthor(str.toString().trim());
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_CATEGORY:
-					item.setCategory(str.toString());
+					item.setCategory(str.toString().trim());
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_LINK:
-					item.setLink(str.toString());
+					item.setLink(str.toString().trim());
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_DESCRIPTION:
-					item.setDescription(str.toString());
+					item.setDescription(str.toString().trim());
 					currentstate = 0;
 					break;
 				case RSSConstants.ITEM_PUBDATE:
-					item.setPubDate(str.toString());
+					item.setPubDate(str.toString().trim());
 					currentstate = 0;
 					break;
 				default:
